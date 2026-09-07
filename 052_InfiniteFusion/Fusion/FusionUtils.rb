@@ -314,14 +314,14 @@ end
 def get_body_number_from_symbol(id)
   dexNum = getDexNumberForSpecies(id)
   return dexNum if !isFusion(dexNum)
-  id.to_s.match(/\d+/)[0]
-  return id.to_s.match(/\d+/)[0].to_i
+  dexNum -= get_head_number_from_symbol(id)
+  return dexNum / Settings::NB_POKEMON
 end
 
 def get_head_number_from_symbol(id)
   dexNum = getDexNumberForSpecies(id)
   return dexNum if !isFusion(dexNum)
-  return id.to_s.match(/(?<=H)\d+/)[0].to_i
+  return dexNum % Settings::NB_POKEMON
 end
 
 def get_fusion_symbol(head_id, body_id)
